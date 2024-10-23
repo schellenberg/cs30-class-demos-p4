@@ -23,9 +23,31 @@ function setup() {
   grid = generateRandomGrid(GRID_SIZE, GRID_SIZE);
 }
 
+function windowResized() {
+  if (windowWidth < windowHeight) {
+    resizeCanvas(windowWidth, windowWidth);
+  }
+  else {
+    resizeCanvas(windowHeight, windowHeight);
+  }
+  cellSize = height/GRID_SIZE;
+}
+
 function draw() {
   background(220);
   displayGrid();
+}
+
+function mousePressed() {
+  let x = Math.floor(mouseX/cellSize);
+  let y = Math.floor(mouseY/cellSize);
+
+  if (grid[y][x] === 1) {
+    grid[y][x] = 0;
+  }
+  else {
+    grid[y][x] = 1;
+  }
 }
 
 function keyPressed() {
